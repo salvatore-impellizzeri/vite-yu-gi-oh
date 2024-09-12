@@ -8,22 +8,23 @@ export default {
   data() {
     return {
       store,
+      allCards: []
     }
+  },
+
+  created() {
+    axios
+    .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+    .then((res) => {
+      console.log(res.data);
+      this.store.allCards = res.data.data;
+    });
   },
 
   components: {
     AppHeader,
     AppMain,
   },
-  
-  created() {
-    axios
-    .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-    .then((res) => {
-      console.log(res.data);
-      this.store.allCards = res.data;
-    });
-  }
 }
 </script>
 

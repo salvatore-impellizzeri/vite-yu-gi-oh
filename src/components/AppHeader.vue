@@ -1,9 +1,10 @@
 <script>
+import { store } from '../store.js';
 
 export default {
   data() {
     return {
-      message: ''
+      store,
     }
   }
 }
@@ -11,15 +12,22 @@ export default {
 
 <!-- All'interno del template ci va un solo figlio -->
 <template> 
-  <div>
-    <header>
-        <h1> 
-            {{ message }}
-        </h1>
-    </header>
+  <div class="p-4 ">
+    <h1> 
+        Yu-Gi-Oh Api
+    </h1>
   </div>
 </template>
 
 <style scoped>
+
+.bg-white{
+  background-color: white;
+}
+
+h1{
+  color: black;
+  font-size: 30px;
+}
 
 </style>

@@ -1,5 +1,5 @@
 <script>
-import { store } from '../store.js';
+import { store } from '../store';
 import axios from 'axios';
 import SingleCard from './SingleCard.vue';
 
@@ -12,7 +12,26 @@ export default {
 
   components: {
     SingleCard
-  }
+  },
+
+  methods: {
+    performSearch() {
+      this.$emit('performSearch');
+    }
+  },
+
+  created() {
+    axios
+    .get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+    .then((type) => {
+      console.log(type.data);
+      this.store.searchType = type.data;
+      console.log(this.store.searchType);
+    })
+    .catch((err) => {
+        this.store.searchType = [];
+    });
+  },
 }
 </script>
 
@@ -21,15 +40,17 @@ export default {
 
         <!-- DROPDOWN -->
 
-        <div class="dropdown">
-            <button class="btn btn-secondary bg-white text-dark border border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
+        <form @submit.prevent="performSearch()" class="w-25 mt-4">
+            <select v-model="selectedType" class="form-control w-25 mb-4">
+              <option value="">Type</option>
+              <option v-for="(type, i) in store.searchType" :key="i">{{ store.searchType[i].archetype_name }}</option>
+            </select>
+        </form>
+
+        <!-- INFO N CARDS -->
+
+        <div class="bg-dark p-4">
+            <span class="text-white fs-3">Found {{ store.allCards.length }} cards</span>
         </div>
 
         <!-- CARDS -->

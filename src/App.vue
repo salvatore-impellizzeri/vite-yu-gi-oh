@@ -12,15 +12,24 @@ export default {
     }
   },
 
-  created() {
-    axios
-    .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
-    .then((res) => {
-      console.log(res.data);
-      this.store.allCards = res.data.data;
-    });
+  created(){
+    this.getDataFromApi();
   },
 
+  methods: {
+    getDataFromApi() {
+      axios
+      .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+      .then((res) => {
+        console.log(res.data);
+        this.store.allCards = res.data.data;
+      })
+      .catch((err) => {
+          this.store.allCards = [];
+      })
+    }
+  },
+  
   components: {
     AppHeader,
     AppMain,
@@ -33,7 +42,7 @@ export default {
     <AppHeader />
   </div>
   <div>
-    <AppMain /> 
+    <AppMain @performSearch="getDataFromApi()" /> 
   </div>
 </template>
 

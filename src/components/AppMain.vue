@@ -22,7 +22,7 @@ export default {
         <!-- DROPDOWN -->
 
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary bg-white text-dark border border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Dropdown button
             </button>
             <ul class="dropdown-menu">
@@ -35,7 +35,7 @@ export default {
         <!-- CARDS -->
 
         <div class="my-bg-white">
-            <div class="container-xxl bg-white p-4 container-cards row">
+            <div class="container-cards p-4 container-cards row">
                 <SingleCard v-for="(v, i) in store.allCards" :cardName="v.name" :cardCategory="v.archetype" :cardImg="v.card_images[0].image_url" class="col-2" />
             </div>    
         </div>
@@ -45,9 +45,13 @@ export default {
 
 <style scoped>
 
+.dropdown{
+    margin-bottom: 50px;
+}
+
 .my-bg-orange{
     background-color: #D48F38;
-    padding: 20px;
+    padding: 50px 70px;
 }
 
 .my-bg-white{

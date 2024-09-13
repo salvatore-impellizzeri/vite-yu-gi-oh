@@ -11,14 +11,22 @@ export default {
 <template>
     <div class="my-card-col mt-4">
         <img :src="cardImg" :alt="cardName">
-        <p class="fs-5 p-3 fw-bold text-white text-center"> {{ cardName }}</p>
-        <div class="text-center">
-            <p class="fs-5"> {{ cardCategory }} </p>
+        <div class="bg-text-orange">
+            <p class="fs-5 p-3 fw-bold text-white text-center"> {{ cardName }}</p>
+            <div class="text-center">
+                <p class="fs-5"> {{ cardCategory }} </p>
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
+
+.bg-text-orange{
+    padding: 20px 0;
+    background-color: orange;
+    text-transform: uppercase;
+}
 
 .my-card-col {
     margin: 20px;

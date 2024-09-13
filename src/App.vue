@@ -17,9 +17,17 @@ export default {
   },
 
   methods: {
-    getDataFromApi() {
-      axios
-      .get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0')
+
+    getDataFromApi(searchType = '') {
+
+    let url = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0';
+
+    if (searchType) {
+        url += `&archetype=${searchType}`;
+    }
+
+    axios
+      .get(url)
       .then((res) => {
         console.log(res.data);
         this.store.allCards = res.data.data;
@@ -42,7 +50,7 @@ export default {
     <AppHeader />
   </div>
   <div>
-    <AppMain @performSearch="getDataFromApi()" /> 
+    <AppMain @performSearch="getDataFromApi" /> 
   </div>
 </template>
 

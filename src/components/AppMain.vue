@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       store,
+      selectedType: '',
     }
   },
 
@@ -16,7 +17,7 @@ export default {
 
   methods: {
     performSearch() {
-      this.$emit('performSearch');
+      this.$emit('performSearch', this.selectedType);
     }
   },
 
@@ -41,9 +42,9 @@ export default {
         <!-- DROPDOWN -->
 
         <form @submit.prevent="performSearch()" class="w-25 mt-4">
-            <select v-model="selectedType" class="form-control w-25 mb-4">
-              <option value="">Type</option>
-              <option v-for="(type, i) in store.searchType" :key="i">{{ store.searchType[i].archetype_name }}</option>
+            <select @change="performSearch" v-model="selectedType" class="form-control w-25 mb-4">
+              <option value="">Select Archetype</option>
+              <option v-for="(type, i) in store.searchType" :value="type.archetype_name" :key="i">{{ store.searchType[i].archetype_name }}</option>
             </select>
         </form>
 
